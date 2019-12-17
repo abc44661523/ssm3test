@@ -1,0 +1,54 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mammonist.dao.DeptDao">
+    <sql id="select">
+        select d.id,d.name,e.id eid,e.name ename,e.sal esal,e.dept_id edept_id
+        from dept d left join emp e on d.id = e.dept_id
+    </sql>
+
+    <select id="getDeptById" parameterType="int" resultMap="deptResultMap">
+        <include refid="select"></include>
+        where d.id = #{id}
+    </select>
+
+    <select id="getAll" resultMap="deptResultMap">
+        <include refid="select"></include>
+    </select>
+
+    <insert id="save" parameterType="Emp">
+        insert into dept (id,name) values (#{id},#{name})
+    </insert>
+
+    <resultMap id="deptResultMap" type="Dept">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <collection property="emps" ofType="Emp">
+            <id property="id" column="eid"></id>
+            <result property="name" column="ename"></result>
+            <result property="salary" column="esal"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getAll2" resultMap="deptResultMap2">
+        select * from dept
+    </select>
+
+    <resultMap id="deptResultMap2" type="Dept">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <collection property="emps" column="id" ofType="Emp" select="selectEmp"></collection>
+    </resultMap>
+
+    <select id="selectEmp" parameterType="int" resultMap="empResultMap">
+        select * from emp where dept_id = #{id}
+    </select>
+    
+    <resultMap id="empResultMap" type="Emp">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="salary" column="sal"></result>
+    </resultMap>
+
+</mapper>

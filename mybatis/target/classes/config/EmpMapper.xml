@@ -1,0 +1,60 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mammonist.dao.EmpDao">
+    <sql id="selectEmp">
+        select e.id,e.name,e.sal,e.dept_id,d.id did,d.name dname
+        from emp e left join dept d
+        on e.dept_id=d.id
+    </sql>
+
+    <insert id="save" parameterType="Emp">
+        insert into emp (name,sal,dept_id) values (#{name},#{salary},#{dept.id})
+    </insert>
+
+    <select id="getEmpById" parameterType="int" resultMap="empResultMap">
+        <include refid="selectEmp"></include>
+        where e.id = #{id}
+    </select>
+
+    <select id="getAll" resultMap="empResultMap">
+        <include refid="selectEmp"></include>
+    </select>
+
+    <delete id="delete" parameterType="int">
+        delete from emp where id = #{id}
+    </delete>
+
+    <update id="update" parameterType="Emp">
+        update emp set name = #{name},sal = #{salary},dept_id = #{dept.id} where id = #{id}
+    </update>
+
+    <resultMap id="empResultMap" type="Emp">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="salary" column="sal"></result>
+        <!-- 映射关联对象-->
+        <association property="dept" javaType="Dept">
+            <id property="id" column="did"></id>
+            <result property="name" column="dname"></result>
+        </association>
+    </resultMap>
+
+    <select id="getAll2" resultMap="empResultMap2">
+        select * from emp
+    </select>
+
+    <resultMap id="empResultMap2" type="Emp">
+        <id property="id" column="id"></id>
+        <result property="name" column="name"></result>
+        <result property="salary" column="sal"></result>
+        <association property="dept" column="dept_id" javaType="Dept" select="selectDept"></association>
+    </resultMap>
+
+    <select id="selectDept" parameterType="int" resultType="Dept">
+        select * from dept where id = #{id}
+    </select>
+
+
+</mapper>

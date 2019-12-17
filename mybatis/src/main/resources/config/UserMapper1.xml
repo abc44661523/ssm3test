@@ -1,0 +1,26 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ljz">
+
+    <insert id="insertUser" parameterType="com.mammonist.entity.User">
+        insert into users (name,age) values (#{name},#{age})
+    </insert>
+
+    <delete id="deleteUser" parameterType="int">
+        delete from users where id = 1
+    </delete>
+    
+    <update id="updateById" parameterType="com.mammonist.entity.User">
+        update users set name = #{name} where id = #{id}
+    </update>
+
+    <select id="getUserById" parameterType="int" resultType="com.mammonist.entity.User">
+        select * from users where id = #{id}
+    </select>
+
+    <select id="getUsers" resultType="com.mammonist.entity.User">
+        select * from users
+    </select>
+</mapper>

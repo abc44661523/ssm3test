@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 设置属性文件 -->
+    <properties resource="db.properties"></properties>
+
+    <typeAliases>
+        <typeAlias type="com.mammonist.entity.User" alias="uu"></typeAlias>
+        <package name="com.mammonist.entity"/>
+    </typeAliases>
+
+    <!--注册自定义类型处理器-->
+    <typeHandlers>
+        <typeHandler handler="com.mammonist.util.ArrayToStringTypeHandler"></typeHandler>
+    </typeHandlers>
+
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor"></plugin>
+    </plugins>
+
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${user}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <mapper resource="config/UserMapper1.xml"></mapper>
+        <mapper resource="config/UserMapper2.xml"></mapper>
+        <mapper class="com.mammonist.dao.UserDao3"></mapper>
+        <mapper resource="config/UserMapper4.xml"></mapper>
+        <mapper resource="config/StudentMapper.xml"></mapper>
+        <mapper resource="config/EmpMapper.xml"></mapper>
+        <mapper resource="config/DeptMapper.xml"></mapper>
+        <mapper resource="config/PersonMapper.xml"></mapper>
+    </mappers>
+
+</configuration>

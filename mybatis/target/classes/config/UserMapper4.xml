@@ -1,0 +1,10 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace: 接口全名-->
+<mapper namespace="com.mammonist.dao.UserDao4">
+    <select id="getUserById" parameterType="int" resultType="com.mammonist.entity.User">
+        select * from users where id = #{id}
+    </select>
+</mapper>
