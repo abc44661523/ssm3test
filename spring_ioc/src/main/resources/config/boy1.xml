@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="japanGirl" class="com.mammonist.perform1.boy1.JapanGirl">
+        <!--name = "构造方法的参数名"-->
+        <constructor-arg name="name" value="三上优雅"></constructor-arg>
+        <constructor-arg name="age" value="18"></constructor-arg>
+    </bean>
+
+<!--    <bean id="japanGirl" class="JapanGirl">-->
+<!--        <property name="name" value="ssyy"></property>-->
+<!--        <property name="age" value="18"></property>-->
+<!--    </bean>-->
+
+<!--    <bean id="frienceGirl" class="FrienceGirl">-->
+<!--        <constructor-arg name="name" value="法国女人"></constructor-arg>-->
+<!--        <constructor-arg name="age" value="20"></constructor-arg>-->
+<!--    </bean>-->
+
+    <bean id="frienceGirl" class="com.mammonist.perform1.boy1.FrienceGirl">
+        <property name="name" value="法国女人"></property>
+        <property name="age" value="18"></property>
+    </bean>
+
+    <bean id="boy" class="com.mammonist.perform1.boy1.Boy">
+        <constructor-arg name="name" value="张苗苗"></constructor-arg>
+        <constructor-arg name="girl" ref="japanGirl"></constructor-arg>
+    </bean>
+
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="root"></property>
+        <property name="password" value="123456"></property>
+        <property name="url" value="jdbc:mysql://localhost:3306/mybatis"></property>
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+    </bean>
+
+<!--    <bean id="user" class="User">-->
+<!--        <property name="age" value="18"></property>-->
+<!--    </bean>-->
+
+    <bean id="userDao" class="com.mammonist.perform1.boy1.UserDao">
+<!--        <property name="user" ref="user"></property>-->
+    </bean>
+
+    <bean id="userService" class="com.mammonist.perform1.boy1.UserService">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+
+    <bean id="userServlet" class="com.mammonist.perform1.boy1.UserServlet">
+        <property name="userService" ref="userService"></property>
+    </bean>
+
+</beans>

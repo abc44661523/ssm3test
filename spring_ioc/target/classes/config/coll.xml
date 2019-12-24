@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="collectionBeanDemo" class="com.mammonist.perform1.coll.CollectionBeanDemo">
+        <property name="course">
+            <list>
+                <value>MySQL</value>
+                <value>Oracle</value>
+                <value>SqlServer</value>
+                <value>MongoDB</value>
+                <value>Redis</value>
+            </list>
+        </property>
+
+        <property name="maps">
+            <map>
+                <entry key="zrq" value="hnb"></entry>
+                <entry key="gc" value="yhnb"></entry>
+                <entry key="ljz" value="znb"></entry>
+            </map>
+        </property>
+        
+        <property name="ps">
+            <props>
+                <prop key="meat">100</prop>
+                <prop key="cow">1000</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
