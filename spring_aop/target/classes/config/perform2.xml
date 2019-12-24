@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 加入命名空間:aop -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+			http://www.springframework.org/schema/beans/spring-beans.xsd
+			http://www.springframework.org/schema/aop
+			http://www.springframework.org/schema/aop/spring-aop.xsd
+			http://www.springframework.org/schema/context
+			http://www.springframework.org/schema/context/spring-context.xsd">
+        <!--配置bean-->
+    <bean id="performImpl" class="com.mammonist.perform2.PerformImpl"></bean>
+    <bean id="audienceAspect" class="com.mammonist.perform2.AudienceAspect"></bean>
+    <!--AOP配置-->
+    <aop:config>
+        <!--切面-->
+        <aop:aspect ref="audienceAspect">
+            <!--切点-->
+            <aop:pointcut id="perf" expression="execution(* com.mammonist.perform2.*.*(..))"/>
+            <!--通知-->
+            <aop:before method="turnOff" pointcut-ref="perf"></aop:before>
+<!--            <aop:after method="applaud" pointcut-ref="perf"></aop:after>-->
+            <aop:around method="exec" pointcut-ref="perf"></aop:around>
+            <aop:after-returning method="applaud" returning="result" pointcut-ref="perf"></aop:after-returning>
+        </aop:aspect>
+    </aop:config>
+</beans>

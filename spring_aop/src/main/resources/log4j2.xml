@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- status:log4j的本身日志输出级别  -->
+<Configuration status="WARN">
+	<Appenders>
+		<!-- target: SYSTEM_OUT 或 SYSTEM.ERR  %logger{36} -->
+		<Console  name="Console" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} %-5level %C %M - %msg%n" />
+		</Console>
+
+	</Appenders>
+	<Loggers>
+		<!--过滤掉spring和mybatis的一些无用的DEBUG信息-->
+		<!-- additivity="true" root日志再来一次 -->
+
+		<Root level="debug">
+			<AppenderRef ref="Console" />
+		</Root>
+	</Loggers>
+</Configuration>
+
