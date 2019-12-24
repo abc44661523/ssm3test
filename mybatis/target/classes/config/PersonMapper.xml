@@ -2,7 +2,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mammonist.dao.PersonDao">
+<mapper namespace="com.mammonist.perform1.dao.PersonDao">
     <insert id="save" parameterType="Person">
         insert into person(name,favor) values(#{name},#{favor})
     </insert>

@@ -3,9 +3,9 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!--namespace: 接口全名-->
-<mapper namespace="com.mammonist.dao.UserDao2">
+<mapper namespace="com.mammonist.perform1.dao.UserDao2">
     <!--id：接口中对应方法名 -->
-    <update id="update" parameterType="com.mammonist.entity.User">
+    <update id="update" parameterType="com.mammonist.perform1.entity.User">
         update users set name = #{name},age = #{age} where id = #{id}
     </update>
 
@@ -17,11 +17,11 @@
         insert into users (name,age) values (#{name},#{age})
     </insert>
 
-    <delete id="delete" parameterType="com.mammonist.entity.User">
+    <delete id="delete" parameterType="com.mammonist.perform1.entity.User">
         delete from users where id = #{id}
     </delete>
 
-    <select id="getUserById" parameterType="com.mammonist.entity.User" resultType="com.mammonist.entity.User">
+    <select id="getUserById" parameterType="com.mammonist.perform1.entity.User" resultType="com.mammonist.perform1.entity.User">
         select * from users where id = #{id}
     </select>
 

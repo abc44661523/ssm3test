@@ -6,13 +6,13 @@
     <properties resource="db.properties"></properties>
 
     <typeAliases>
-        <typeAlias type="com.mammonist.entity.User" alias="uu"></typeAlias>
+        <typeAlias type="com.mammonist.perform1.entity.User" alias="uu"></typeAlias>
         <package name="com.mammonist.entity"/>
     </typeAliases>
 
     <!--注册自定义类型处理器-->
     <typeHandlers>
-        <typeHandler handler="com.mammonist.util.ArrayToStringTypeHandler"></typeHandler>
+        <typeHandler handler="com.mammonist.perform1.util.ArrayToStringTypeHandler"></typeHandler>
     </typeHandlers>
 
     <plugins>
@@ -34,7 +34,7 @@
     <mappers>
         <mapper resource="config/UserMapper1.xml"></mapper>
         <mapper resource="config/UserMapper2.xml"></mapper>
-        <mapper class="com.mammonist.dao.UserDao3"></mapper>
+        <mapper class="com.mammonist.perform1.dao.UserDao3"></mapper>
         <mapper resource="config/UserMapper4.xml"></mapper>
         <mapper resource="config/StudentMapper.xml"></mapper>
         <mapper resource="config/EmpMapper.xml"></mapper>

@@ -2,7 +2,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.mammonist.dao.DeptDao">
+<mapper namespace="com.mammonist.perform1.dao.DeptDao">
     <sql id="select">
         select d.id,d.name,e.id eid,e.name ename,e.sal esal,e.dept_id edept_id
         from dept d left join emp e on d.id = e.dept_id
