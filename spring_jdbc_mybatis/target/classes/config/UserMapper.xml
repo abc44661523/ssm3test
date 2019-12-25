@@ -1,0 +1,62 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--namespace: 接口全名-->
+<mapper namespace="com.mammonist.dao.UserDao">
+    <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        insert into users (name,age) values (#{name},#{age})
+    </insert>
+
+<!--    &lt;!&ndash;id：接口中对应方法名 &ndash;&gt;-->
+<!--    <update id="update" parameterType="com.mammonist.perform1.entity.User">-->
+<!--        update users set name = #{name},age = #{age} where id = #{id}-->
+<!--    </update>-->
+
+<!--    <select id="getAll" resultType="User">-->
+<!--        select * from users-->
+<!--    </select>-->
+
+<!--    <delete id="delete" parameterType="com.mammonist.perform1.entity.User">-->
+<!--        delete from users where id = #{id}-->
+<!--    </delete>-->
+
+<!--    <select id="getUserById" parameterType="com.mammonist.perform1.entity.User" resultType="com.mammonist.perform1.entity.User">-->
+<!--        select * from users where id = #{id}-->
+<!--    </select>-->
+
+<!--    <select id="getUserByAge" resultType="User">-->
+<!--        select * from users where age &lt; #{max1} and age &gt; #{min1}-->
+<!--    </select>-->
+
+<!--    <select id="getUserByID" parameterType="int" resultType="map">-->
+<!--        select * from users where id = #{id}-->
+<!--    </select>-->
+
+<!--    &lt;!&ndash;动态sql语句&ndash;&gt;-->
+<!--    <select id="getUsersByUser" parameterType="User" resultType="User">-->
+<!--        select * from users-->
+<!--        <where>-->
+<!--            <if test="name != null">-->
+<!--                name like #{name}-->
+<!--            </if>-->
+<!--            <if test="age > 0">-->
+<!--                and age > #{age}-->
+<!--            </if>-->
+<!--        </where>-->
+<!--    </select>-->
+
+<!--    <update id="update2" parameterType="User">-->
+<!--        update users-->
+<!--        <set>-->
+<!--            <if test="name != null ">-->
+<!--                name = #{name},-->
+<!--            </if>-->
+<!--            <if test="age != null ">-->
+<!--                age = #{age}-->
+<!--            </if>-->
+<!--        </set>-->
+<!--        where id = #{id}-->
+<!--    </update>-->
+
+</mapper>

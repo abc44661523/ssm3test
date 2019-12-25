@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 加入命名空間:aop -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+<!--定义属性文件-->
+    <context:property-placeholder location="db.properties"></context:property-placeholder>
+    <!--配置数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="username" value="${user}"></property>
+        <property name="password" value="${password}"></property>
+        <property name="url" value="${url}"></property>
+        <property name="driverClassName" value="${driver}"></property>
+    </bean>
+    <!--配置SqlSessionFactory对象-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据源-->
+        <property name="dataSource" ref="dataSource"></property>
+        <!--注入MyBatis配置的相关信息,配置文件的路径-->
+        <property name="configLocation" value="mybatis_conf.xml"></property>
+    </bean>
+    <!--配置事务管理-->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"></property>
+    </bean>
+    <!--基于XML文件配置的事务管理-->
+    <!--配置的事务的通知-->
+    <tx:advice transaction-manager="txManager" id="txAdvice">
+        <!--配置事务属性-->
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="*" read-only="false"/>
+        </tx:attributes>
+    </tx:advice>
+    <!--相当于配置切面-->
+    <aop:config>
+        <aop:pointcut id="perf" expression="execution(* com.mammonist.service.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="perf"></aop:advisor>
+    </aop:config>
+    <!--配置UserDao对象-->
+    <bean id="userDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <!--注入SqlSessionFactory对象-->
+        <property name="sqlSessionFactory" ref="sqlSessionFactory"></property>
+        <!--注入接口的名字-->
+        <property name="mapperInterface" value="com.mammonist.dao.UserDao"></property>
+    </bean>
+
+    <bean id="userService2" class="com.mammonist.service.UserService2">
+        <property name="userDao" ref="userDao"></property>
+    </bean>
+
+</beans>
